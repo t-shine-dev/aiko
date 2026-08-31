@@ -3,7 +3,7 @@
         // ============================================================
         const CONFIG = {
             password: '3027',
-            birthday: '2026-08-01T00:00:00',
+            birthday: '2026-09-01T00:00:00',
             galleryImages: [
                 'image/image1.jpeg',
                 'image/image2.jpeg',
