@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Aiko - Happy Birthday ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+     <!-- Style CSS -->
+     <link rel="stylesheet" href="style.css">
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- ========== STARS BACKGROUND ========== -->
+    <div id="stars"></div>
+
+    <!-- ========== MUSIC BUTTON ========== -->
+    <button id="musicBtn" class="music-btn pulsing" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- ========== SCREEN 1: WELCOME ========== -->
+    <div id="screen-welcome" class="screen active">
+        <div class="text-center max-w-md mx-auto glass p-10 md:p-12" style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(24px);">
+            <div class="text-6xl mb-6 animate-pulse">💌</div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-3" style="background: linear-gradient(135deg, #EC4899, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                A Special Delivery
+            </h1>
+            <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                Made with love by someone who thinks about you every day.
+            </p>
+            <button onclick="goToScreen('screen-password')" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-pink-500/30 transform hover:scale-105 active:scale-95">
+                Tap to continue ❤️
+            </button>
+            <div class="mt-4 text-sm text-gray-500">✨ <span id="welcome-time"></span></div>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN 2: PASSWORD ========== -->
+    <div id="screen-password" class="screen">
+        <div class="glass p-8 md:p-12 max-w-sm w-full text-center" style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(24px);">
+            <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-pink-500/50 shadow-xl shadow-pink-500/20">
+                <img src="image/image9.jpeg"alt="Aiko" class="w-full h-full object-cover object-center" />
+            </div>
+            <h2 class="text-2xl font-bold mb-1">MY AIKO 👑</h2>
+            <p class="text-gray-400 text-sm mb-6">Enter our secret code to unlock your surprise.</p>
+            <div id="passwordDots" class="flex justify-center gap-2 mb-6">
+                <span class="password-dot empty"></span>
+                <span class="password-dot empty"></span>
+                <span class="password-dot empty"></span>
+                <span class="password-dot empty"></span>
+            </div>
+            <input type="password" id="passwordInput" class="password-input" maxlength="4" autofocus />
+            <div id="passwordError" class="text-red-400 text-sm h-6 mb-3 hidden">
+                ❌ Hmm... that's not our code.
+            </div>
+            <div class="grid grid-cols-3 gap-3 max-w-[240px] mx-auto">
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="1">1</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="2">2</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="3">3</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="4">4</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="5">5</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="6">6</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="7">7</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="8">8</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="9">9</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="clear">⌫</button>
+                <button class="num-btn py-3 rounded-xl bg-white/5 hover:bg-white/10 transition text-xl font-semibold" data-num="0">0</button>
+                <button class="num-btn py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold transition hover:shadow-lg" data-num="enter">↵</button>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">Hint: 4 digits • our special date</p>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN 3: COUNTDOWN ========== -->
+    <div id="screen-countdown" class="screen">
+        <div class="glass p-8 md:p-12 max-w-md w-full text-center" style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(24px);">
+            <div class="text-5xl mb-4">🎂</div>
+            <h2 class="text-2xl font-bold mb-2">Your special day is coming...</h2>
+            <div id="countdownDisplay" class="grid grid-cols-4 gap-3 mt-6">
+                <div><div class="countdown-number" id="cd-days">00</div><div class="countdown-label">Days</div></div>
+                <div><div class="countdown-number" id="cd-hours">00</div><div class="countdown-label">Hours</div></div>
+                <div><div class="countdown-number" id="cd-minutes">00</div><div class="countdown-label">Minutes</div></div>
+                <div><div class="countdown-number" id="cd-seconds">00</div><div class="countdown-label">Seconds</div></div>
+            </div>
+            <p class="text-gray-400 text-sm mt-6">❤️ Counting down to your special moment ❤️</p>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN 4: BIRTHDAY ========== -->
+    <div id="screen-birthday" class="screen">
+        <div class="text-center max-w-md mx-auto glass p-10 md:p-12" style="background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(24px);">
+            <div class="text-7xl mb-4 animate-bounce">🎉</div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-3" style="background: linear-gradient(135deg, #EC4899, #8B5CF6, #EC4899); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 3s ease-in-out infinite;">
+                Happy Birthday My Princess ❤️
+            </h1>
+            <p class="text-xl text-gray-300 mb-6">Today is all about you.</p>
+            <button onclick="goToScreen('screen-gallery')" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-pink-500/30 transform hover:scale-105 active:scale-95">
+                Continue to Memories 📷
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN 5: GALLERY ========== -->
+    <div id="screen-gallery" class="screen">
+        <div class="max-w-2xl w-full">
+            <h2 class="text-2xl font-bold text-center mb-4" style="background: linear-gradient(135deg, #EC4899, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                ❤️ Memory Gallery ❤️
+            </h2>
+            <div class="glass p-4 relative overflow-hidden" style="background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(24px);">
+                <div class="gallery-track" id="galleryTrack"></div>
+                <div class="flex justify-between mt-4 px-2">
+                    <button onclick="galleryPrev()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">←</button>
+                    <span id="galleryIndex" class="text-sm text-gray-400">1 / 8</span>
+                    <button onclick="galleryNext()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">→</button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-2">❤️ Swipe or tap arrows ❤️</p>
+            </div>
+        </div>
+        <button onclick="goToScreen('screen-letter')" class="mt-6 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">
+            Next 💌
+        </button>
+    </div>
+
+    <!-- ========== SCREEN 6: LOVE LETTER ========== -->
+    <div id="screen-letter" class="screen">
+        <div class="max-w-lg w-full glass p-8 md:p-10" style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(24px);">
+            <div class="text-center text-3xl mb-4">💌</div>
+            <h2 class="text-xl font-bold text-center mb-4" style="color: #EC4899;">My Love Letter to You</h2>
+            <div id="letterContent" class="text-gray-300 leading-relaxed text-sm md:text-base space-y-3" style="font-family: 'Georgia', serif;">
+                <p>Happy Birthday, my princess.</p>
+                <p>Distance may separate us, but it has never reduced the place you hold in my heart.</p>
+                <p>Every conversation, every smile, every little moment we've shared has become part of my happiest memories.</p>
+                <p>Today I celebrate not just your birthday but the amazing person you are.</p>
+                <p>I pray this new year brings you peace, success, happiness, and countless reasons to smile.</p>
+                <p>Thank you for being you.</p>
+                <p class="text-lg font-semibold" style="color: #EC4899;">I love you endlessly. ❤️</p>
+            </div>
+        </div>
+        <button onclick="goToScreen('screen-reasons')" class="mt-6 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">
+            Next ❤️
+        </button>
+    </div>
+
+    <!-- ========== SCREEN 7: REASONS (SOLID BACKGROUND) ========== -->
+    <div id="screen-reasons" class="screen">
+        <div class="max-w-lg w-full">
+            <h2 class="text-xl font-bold text-center mb-4" style="background: linear-gradient(135deg, #EC4899, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                20 Reasons I Love You
+            </h2>
+            <div class="reason-card">
+                <div id="reasonText" class="text-lg md:text-xl font-medium leading-relaxed">
+                    ❤️ Your smile makes my day.
+                </div>
+            </div>
+            <div class="flex justify-between mt-4">
+                <button onclick="reasonPrev()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">←</button>
+                <span id="reasonIndex" class="text-sm text-gray-400">1 / 20</span>
+                <button onclick="reasonNext()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">→</button>
+            </div>
+            <div class="flex justify-center mt-3 gap-2">
+                <button onclick="reasonAutoPlay()" id="reasonAutoBtn" class="px-4 py-1 rounded-full text-xs bg-white/10 hover:bg-white/20 transition">
+                    ▶ Auto-play
+                </button>
+            </div>
+        </div>
+        <button onclick="goToScreen('screen-surprise')" class="mt-6 px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm">
+            Next 🎁
+        </button>
+    </div>
+
+    <!-- ========== SCREEN 8: FINAL SURPRISE ========== -->
+    <div id="screen-surprise" class="screen">
+        <div class="text-center max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-6" style="background: linear-gradient(135deg, #EC4899, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                One Last Surprise 🎁
+            </h2>
+            <div class="gift-box mx-auto" id="giftBox" onclick="openGift()">
+                <div class="lid"></div>
+                <div class="ribbon"></div>
+                <div class="ribbon-h"></div>
+                <span class="text-5xl relative z-10">🎁</span>
+            </div>
+            <div id="giftMessage" class="mt-6 hidden glass p-6" style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(24px);">
+                <p class="text-lg text-gray-200 leading-relaxed">
+                    One last thing...<br />
+                    Thank you for choosing to be part of my life.<br />
+                    <span class="text-xl font-bold" style="color: #EC4899;">Happy Birthday, My Love. ❤️</span>
+                </p>
+                <div class="mt-4 text-3xl">🎆</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CONFETTI / BALLOONS / FIREWORK CONTAINERS ========== -->
+    <div id="confettiContainer" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></div>
+    <div id="balloonContainer" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;"></div>
+    <div id="fireworkContainer" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;"></div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
